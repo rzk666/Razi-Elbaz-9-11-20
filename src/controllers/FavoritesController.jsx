@@ -20,7 +20,7 @@ const FavoritesController = (props) => {
   return (
     <View
       {...props}
-      {...state}
+      temp={temp}
     />
   );
 };

@@ -1,0 +1,14 @@
+    .navbar_content{
+        display: flex;
+        width: 100vw;
+        height: var(--header-height);
+        padding: 0 24px;
+        align-items: center;
+        justify-content: space-between;
+        .nav_buttons{
+            display: flex;
+            a{
+                margin-right: 20px;
+            }
+        }
+    }

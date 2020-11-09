@@ -6,7 +6,7 @@ const FavoritesView = ({
   weather,
 }) => (
   <div className={styles.wrapper}>
-    Home Page
+    Favorites Page
   </div>
 );
 
