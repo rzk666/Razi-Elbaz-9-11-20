@@ -3,7 +3,11 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Universal
 import { HOME, FAVORITES } from './universal/pages';
-import './App.scss';
+// Page Components
+import HomeIndex from './pages/HomeIndex';
+import FavoritesIndex from './pages/FavoritesIndex';
+// Global Styles
+import './Globals.scss';
 
 const App = () => (
   <>
