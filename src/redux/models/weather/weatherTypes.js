@@ -1,0 +1,4 @@
+// weather types
+export const WEATHER_IS_LOADING = 'WEATHER_IS_LOADING';
+export const WEATHER_GET_DATA = 'WEATHER_GET_DATA';
+export const WEATHER_HAS_ERROR = 'WEATHER_HAS_ERROR';

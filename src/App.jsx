@@ -1,16 +1,21 @@
 import React from 'react';
-// Material UI
-import Button from '@material-ui/core/Button';
-import './App.scss';
+// Router
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// Universal
+import { HOME, FAVORITES } from './universal/pages';
+// Page Components
+import HomeIndex from './pages/HomeIndex';
+import FavoritesIndex from './pages/FavoritesIndex';
 
-function App() {
-  return (
-    <div>
-      <Button variant="contained" color="secondary">
-        Click Me
-      </Button>
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <Router>
+      <Switch>
+        <Route path="/" exact render={(props) => (<HomeIndex {...props} page={HOME} />)} />
+        <Route path={`/${FAVORITES}`} exact render={(props) => (<FavoritesIndex {...props} page={FAVORITES} />)} />
+      </Switch>
+    </Router>
+  </>
+);
 
 export default App;
