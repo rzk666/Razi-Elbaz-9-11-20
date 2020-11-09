@@ -20,7 +20,7 @@ const HomeController = (props) => {
   return (
     <View
       {...props}
-      {...state}
+      temp={temp}
     />
   );
 };

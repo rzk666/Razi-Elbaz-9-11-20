@@ -8,7 +8,7 @@ import {
 } from './weatherTypes';
 
 // This is temp and will change soon
-const weather = (state = INITIAL_STATE.users, action) => {
+const weather = (state = INITIAL_STATE.weather, action) => {
   switch (action.type) {
     case WEATHER_IS_LOADING: {
       return { ...state, isLoading: action.isLoading };

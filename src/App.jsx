@@ -6,8 +6,6 @@ import { HOME, FAVORITES } from './universal/pages';
 // Page Components
 import HomeIndex from './pages/HomeIndex';
 import FavoritesIndex from './pages/FavoritesIndex';
-// Global Styles
-import './Globals.scss';
 
 const App = () => (
   <>

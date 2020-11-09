@@ -2,7 +2,7 @@ import React from 'react';
 // import Navbar from '../components/common/Navbar';
 
 // TEMP
-const NavBar = () => <></>;
+const Navbar = () => <></>;
 
 const WithLayoutHOC = (ComposedComponent) => {
   const WithLayout = (props) => (
