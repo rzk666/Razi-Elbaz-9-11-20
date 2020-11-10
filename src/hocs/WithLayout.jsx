@@ -22,6 +22,16 @@ const WithLayoutHOC = (ComposedComponent) => {
     const [darkMode, toggleDarkMode] = useState(false);
     const theme = createMuiTheme({
       palette: darkMode ? { ...darkPalette } : {},
+      overrides: {
+        MuiCard: {
+          root: {
+            boxShadow:
+          darkMode
+            ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
+            : '0 3px 5px 2px rgba(0, 0, 0, .3)',
+          },
+        },
+      },
     });
     return (
       <ThemeProvider theme={theme}>

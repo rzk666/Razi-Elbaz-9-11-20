@@ -37,7 +37,10 @@ const WeatherSearch = ({ fetchWeather }) => {
     if (!searchValue) {
       setOptions([]);
     } else {
-      getCities(searchValue);
+      const wasCitySelected = options.find((option) => option.LocalizedName === searchValue);
+      if (!wasCitySelected) {
+        getCities(searchValue);
+      }
     }
   }, [searchValue]);
 
@@ -45,13 +48,14 @@ const WeatherSearch = ({ fetchWeather }) => {
     <Autocomplete
       filterOptions={(x) => x}
       fullWidth
-      color="red"
       options={options}
       getOptionLabel={(option) => option.LocalizedName || ''}
       onInputChange={(e, newValue) => setSearchValue(newValue)}
       onChange={(e, selectedValue) => {
-        const { Key } = selectedValue;
-        fetchWeather(Key);
+        if (selectedValue) {
+          const { Key } = selectedValue;
+          fetchWeather(Key);
+        }
       }}
       freeSolo
       renderInput={(props) => (
