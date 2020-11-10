@@ -6,10 +6,11 @@ import styles from './HomeView.module.scss';
 
 const HomeView = ({
   weather,
+  fetchWeather,
 }) => (
   <div className={styles.wrapper}>
     <div className={styles.search_container}>
-      <WeatherSearch />
+      <WeatherSearch fetchWeather={fetchWeather} />
     </div>
   </div>
 );

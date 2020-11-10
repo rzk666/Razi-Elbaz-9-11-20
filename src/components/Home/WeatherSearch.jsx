@@ -7,8 +7,6 @@ import HttpRequest from '../../utils/HttpRequest';
 import { throttle } from 'underscore';
 // Config
 import config from '../../common/config';
-// Styles
-import styles from './WeatherSearch.module.scss';
 
 const searchCities = (query) => HttpRequest()({
   method: 'get',
@@ -17,15 +15,20 @@ const searchCities = (query) => HttpRequest()({
   url: 'https://testsh.free.beeceptor.com/getcities',
 });
 
-const WeatherSearch = ({ prop }) => {
+const WeatherSearch = ({ fetchWeather }) => {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [error, setError] = useState(false);
   // This is throttling
-  const getCities = useCallback(throttle(async (searchValue) => {
+  const getCities = useCallback(throttle(async (query) => {
     setLoading(true);
-    const { data } = await searchCities(searchValue);
-    setOptions(data);
+    try {
+      const { data } = await searchCities(query);
+      setOptions(data);
+    } catch (e) {
+      setError(e);
+    }
     setLoading(false);
   }, 250), []);
 
@@ -42,12 +45,13 @@ const WeatherSearch = ({ prop }) => {
     <Autocomplete
       filterOptions={(x) => x}
       fullWidth
-      variant="error"
+      color="red"
       options={options}
       getOptionLabel={(option) => option.LocalizedName || ''}
       onInputChange={(e, newValue) => setSearchValue(newValue)}
-      onChange={(e, newValue) => {
-        // Call server here getNewOptions(newValue);
+      onChange={(e, selectedValue) => {
+        const { Key } = selectedValue;
+        fetchWeather(Key);
       }}
       freeSolo
       renderInput={(props) => (

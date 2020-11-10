@@ -5,5 +5,10 @@ export const INITIAL_STATE = {
     hasError: false,
     error: '',
     data: [],
+    forecast: {
+      isLoading: false,
+      headline: {},
+      daily: [],
+    },
   },
 };

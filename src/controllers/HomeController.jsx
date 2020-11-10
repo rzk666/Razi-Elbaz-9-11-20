@@ -6,21 +6,25 @@ const HomeController = (props) => {
     // Global state
     weather,
     // Redux actions
+    fetchWeather,
+    fetchForecast,
   } = props;
-
-  // State
-  const [temp, setTemp] = useState(0);
 
   // ----- useEffects ----- //
   useEffect(() => {
     console.log('MOUNT');
   }, []);
 
+  const fetchWeatherWithForcast = () => {
+    fetchWeather();
+    fetchForecast();
+  };
+
   const { View } = props;
   return (
     <View
       {...props}
-      temp={temp}
+      fetchWeather={fetchWeatherWithForcast}
     />
   );
 };
