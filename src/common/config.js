@@ -11,7 +11,10 @@ const config = {
     protocol: SERVER_PROTOCOL,
   },
   api: {
-    url: `${SERVER_PROTOCOL}://${SERVER_HOST}/`,
+    url: `${SERVER_PROTOCOL}://${SERVER_HOST}`,
+  },
+  credentials: {
+    weatherApi: 'q4KARGiRRhZ409UDQrU8gdQAOgsaHnpS',
   },
 };
 

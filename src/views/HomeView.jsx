@@ -1,12 +1,16 @@
 import React from 'react';
+// Components
+import WeatherSearch from '../components/Home/WeatherSearch';
 // styles
-import styles from './HomeView.scss';
+import styles from './HomeView.module.scss';
 
 const HomeView = ({
   weather,
 }) => (
   <div className={styles.wrapper}>
-    Home Page
+    <div className={styles.search_container}>
+      <WeatherSearch />
+    </div>
   </div>
 );
 
