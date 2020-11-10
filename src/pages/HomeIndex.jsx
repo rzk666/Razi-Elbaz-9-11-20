@@ -5,6 +5,11 @@ import page from '../hocs/page';
 import { HOME } from '../universal/pages';
 // Redux
 import { connect } from 'react-redux';
+// Redux Actions
+import {
+  fetchWeather,
+  fetchForecast,
+} from '../redux/models/weather/weatherActions';
 // Components
 import HomeController from '../controllers/HomeController';
 import HomeView from '../views/HomeView';
@@ -16,7 +21,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  fetchWeather: (Key) => dispatch(fetchWeather(Key)),
+  fetchForecast: (Key) => dispatch(fetchForecast(Key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page(Home, HOME));
