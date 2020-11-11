@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import HttpRequest from '../utils/HttpRequest';
 // Config
 import config from '../common/config';
-import { sleep } from '../common/libs';
 
 const getWeatherByKey = (key) => HttpRequest()({
   method: 'get',
@@ -21,11 +20,6 @@ const getLocationsByKey = (key) => HttpRequest()({
 });
 
 const FavoritesController = (props) => {
-  const {
-    // Redux actions
-    test,
-  } = props;
-
   // ----- state ----- //
   const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
   const [favoritesData, setFavoritesData] = useState({});
@@ -37,12 +31,14 @@ const FavoritesController = (props) => {
       const favoriteData = weatherResponse.data[0];
       const locationResponse = await getLocationsByKey(favoriteKey);
       const locationData = locationResponse.data;
-      const { LocalizedName, Country } = locationData;
+      const { LocalizedName, Country, GeoPosition } = locationData;
+      const { Latitude, Longitude } = GeoPosition;
       setFavoritesData({
         ...favoriteData,
         key: favoriteKey,
         city: LocalizedName,
         country: Country.LocalizedName,
+        coords: { latitude: Latitude, longitude: Longitude },
       });
     } catch (e) {
     // Handle error

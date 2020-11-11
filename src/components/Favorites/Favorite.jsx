@@ -26,7 +26,7 @@ const Favorite = ({
   data, tempratureType, style,
 }) => {
   const {
-    WeatherIcon, WeatherText, Temperature, key, city, country,
+    WeatherIcon, WeatherText, Temperature, key, city, country, coords,
   } = data;
   const { Imperial } = Temperature;
   const { Value } = Imperial;
@@ -40,6 +40,7 @@ const Favorite = ({
         city,
         country,
         isFavorite: true,
+        coords,
       },
       favoriteFullData: data,
     }}

@@ -21,7 +21,7 @@ export const forecastIsLoading = (isLoading) => ({
   isLoading,
 });
 
-export const weatherGetData = (data, key, fromClient) => ({
+export const weatherGetData = (data, key, fromClient = false) => ({
   type: WEATHER_GET_DATA,
   data,
   key,

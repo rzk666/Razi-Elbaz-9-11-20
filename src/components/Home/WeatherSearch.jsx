@@ -8,6 +8,14 @@ import { throttle } from 'underscore';
 // Config
 import config from '../../common/config';
 
+// ----- Help Functions ----- //
+const getLocationInfo = (key) => HttpRequest()({
+  method: 'get',
+  // This is the url for production
+  // url: `${config.api.url}/locations/v1/${key}?apikey=${config.credentials.weatherApi}`,
+  url: 'https://testsh.free.beeceptor.com/getlocation',
+});
+
 const searchCities = (query) => HttpRequest()({
   method: 'get',
   // This is the url for production
@@ -15,6 +23,7 @@ const searchCities = (query) => HttpRequest()({
   url: 'https://testsh.free.beeceptor.com/getcities',
 });
 
+// ----- Main Component ----- //
 const WeatherSearch = ({ fetchWeather, setCurrentLocation }) => {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -51,14 +60,18 @@ const WeatherSearch = ({ fetchWeather, setCurrentLocation }) => {
       options={options}
       getOptionLabel={(option) => option.LocalizedName || ''}
       onInputChange={(e, newValue) => setSearchValue(newValue)}
-      onChange={(e, selectedValue) => {
+      onChange={async (e, selectedValue) => {
         if (selectedValue) {
           const { Key, LocalizedName, Country } = selectedValue;
+          const { data } = await getLocationInfo(Key);
+          const { GeoPosition } = data;
+          const { Latitude, Longitude } = GeoPosition;
           fetchWeather(Key);
           setCurrentLocation({
             city: LocalizedName,
             country: Country.LocalizedName,
             key: Key,
+            coords: { latitude: Latitude, longitude: Longitude },
           });
         }
       }}
