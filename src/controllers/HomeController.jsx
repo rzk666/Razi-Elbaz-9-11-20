@@ -33,15 +33,19 @@ const HomeController = (props) => {
   }, []);
 
   useEffect(() => {
-    const { isFavorite, key } = currentLocation;
+    const { key } = currentLocation;
     if (key) {
-      localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
+      const isFavorite = !!favoritesList.find((x) => x === key);
       setCurrentLocation({
         ...currentLocation,
         isFavorite,
       });
     }
   }, [currentLocation.key]);
+
+  useEffect(() => {
+    localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
+  }, [currentLocation]);
 
   const fetchWeatherWithForcast = (key) => {
     fetchWeather(key);
