@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
     forecast: {
       isLoading: false,
       headline: {},
-      daily: [],
+      daily: [null, null, null, null, null],
     },
   },
 };

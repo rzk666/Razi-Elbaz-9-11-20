@@ -29,15 +29,6 @@ const ForecastContainer = withStyles({
 const Forecast = ({
   data, isLoading, tempratureType,
 }) => {
-  const { Day, Temperature } = data;
-  const { Maximum, Minimum } = Temperature;
-  const formattedTempratures = {
-    min: tempratureType === 'F' ? Minimum.Value : getCelcious(Minimum.Value),
-    max: tempratureType === 'F' ? Maximum.Value : getCelcious(Maximum.Value),
-  };
-  const { Icon, IconPhrase } = Day;
-  const iconId = Icon / 10 >= 1 ? Icon : `0${Icon}`;
-  const formattedDate = new Date(data.Date).toDateString();
   if (isLoading) {
     return (
       <Skeleton
@@ -47,6 +38,15 @@ const Forecast = ({
       />
     );
   }
+  const { Day, Temperature } = data;
+  const { Maximum, Minimum } = Temperature;
+  const formattedTempratures = {
+    min: tempratureType === 'F' ? Minimum.Value : getCelcious(Minimum.Value),
+    max: tempratureType === 'F' ? Maximum.Value : getCelcious(Maximum.Value),
+  };
+  const { Icon, IconPhrase } = Day;
+  const iconId = Icon / 10 >= 1 ? Icon : `0${Icon}`;
+  const formattedDate = new Date(data.Date).toDateString();
   return (
     <ForecastContainer className={styles.container}>
       <h2 className={styles.title}>{formattedDate}</h2>
