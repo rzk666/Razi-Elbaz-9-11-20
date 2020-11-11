@@ -15,7 +15,7 @@ const searchCities = (query) => HttpRequest()({
   url: 'https://testsh.free.beeceptor.com/getcities',
 });
 
-const WeatherSearch = ({ fetchWeather, setCurrentCity }) => {
+const WeatherSearch = ({ fetchWeather, setCurrentLocation }) => {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -55,7 +55,7 @@ const WeatherSearch = ({ fetchWeather, setCurrentCity }) => {
         if (selectedValue) {
           const { Key, LocalizedName, Country } = selectedValue;
           fetchWeather(Key);
-          setCurrentCity({
+          setCurrentLocation({
             city: LocalizedName,
             country: Country.LocalizedName,
           });
