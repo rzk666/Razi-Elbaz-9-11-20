@@ -1,6 +1,7 @@
 import React from 'react';
 // Components
 import { Card, withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 // Libs
 import { getCelcious } from '../../common/libs';
 // Animations
@@ -32,20 +33,31 @@ const Favorite = ({
   const formattedTemperature = tempratureType === 'F' ? Value : getCelcious(Value);
   const iconId = WeatherIcon / 10 >= 1 ? WeatherIcon : `0${WeatherIcon}`;
   return (
-    <AnimateOpacityHover>
-      <AnimateScaleClick>
-        <FavoriteContainer className={styles.container} style={style}>
-          <h2 className={styles.title}>{city}</h2>
-          <div className={styles.details_container}>
-            <img src={`https://developer.accuweather.com/sites/default/files/${iconId}-s.png`} alt="" />
-            <p>{WeatherText}</p>
-          </div>
-          <div className={styles.temprature}>
-            {`${formattedTemperature}°${tempratureType}`}
-          </div>
-        </FavoriteContainer>
-      </AnimateScaleClick>
-    </AnimateOpacityHover>
+    <Link to={{
+      pathname: '/',
+      location: {
+        key,
+        city,
+        country,
+        isFavorite: true,
+      },
+    }}
+    >
+      <AnimateOpacityHover>
+        <AnimateScaleClick>
+          <FavoriteContainer className={styles.container} style={style}>
+            <h2 className={styles.title}>{city}</h2>
+            <div className={styles.details_container}>
+              <img src={`https://developer.accuweather.com/sites/default/files/${iconId}-s.png`} alt="" />
+              <p>{WeatherText}</p>
+            </div>
+            <div className={styles.temprature}>
+              {`${formattedTemperature}°${tempratureType}`}
+            </div>
+          </FavoriteContainer>
+        </AnimateScaleClick>
+      </AnimateOpacityHover>
+    </Link>
   );
 };
 
