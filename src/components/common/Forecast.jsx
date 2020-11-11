@@ -37,7 +37,6 @@ const Forecast = ({
   };
   const { Icon, IconPhrase } = Day;
   const iconId = Icon / 10 >= 1 ? Icon : `0${Icon}`;
-  // const statusImageSrc =
   const formattedDate = new Date(data.Date).toDateString();
   if (isLoading) {
     return (
