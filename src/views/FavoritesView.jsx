@@ -3,10 +3,15 @@ import React from 'react';
 import styles from './FavoritesView.module.scss';
 
 const FavoritesView = ({
-  weather,
+  favorites,
 }) => (
   <div className={styles.wrapper}>
-    Favorites Page
+    {favorites.map((favorite) => {
+      if (typeof favorite === 'string') {
+        return <div>LOADING</div>;
+      }
+      return <div>DONE</div>;
+    })}
   </div>
 );
 

@@ -12,7 +12,7 @@ import FavoritesView from '../views/FavoritesView';
 const Favorites = (props) => <FavoritesController {...props} View={FavoritesView} />;
 
 const mapStateToProps = (state) => ({
-  weather: state.weather,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
