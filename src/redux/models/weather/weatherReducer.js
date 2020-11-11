@@ -38,8 +38,8 @@ const weather = (state = INITIAL_STATE.weather, action) => {
       };
     }
     case WEATHER_GET_DATA: {
-      const { data, key } = action;
-      const currentConditionData = data[0];
+      const { data, key, fromClient } = action;
+      const currentConditionData = fromClient ? data : data[0];
       return {
         ...state,
         key,

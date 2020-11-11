@@ -7,11 +7,12 @@ const HomeController = (props) => {
     // Redux actions
     fetchWeather,
     fetchForecast,
+    weatherGetData,
   } = props;
 
-  //   const history = useHistory();
-  //   const { location } = history;
-  //   const { selectedFavorite } = location;
+  const history = useHistory();
+  const { location } = history;
+  const { currentFavorite, favoriteFullData } = location;
 
   const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
 
@@ -25,16 +26,23 @@ const HomeController = (props) => {
 
   // ----- useEffects ----- //
   useEffect(() => {
-
+    // This means we got here by clicking on a favorite on the favorites page
+    if (currentFavorite) {
+      const { key } = currentFavorite;
+      weatherGetData(favoriteFullData, key);
+      fetchForecast(key);
+      setCurrentLocation(currentFavorite);
+    }
   }, []);
 
   useEffect(() => {
-    const { key } = currentLocation;
-    const isFavorite = !!favoritesList.find((x) => x === key);
-    setCurrentLocation({
-      ...currentLocation,
-      isFavorite,
-    });
+    const { isFavorite, key } = currentLocation;
+    if (key) {
+      setCurrentLocation({
+        ...currentLocation,
+        isFavorite,
+      });
+    }
   }, [currentLocation.key]);
 
   const fetchWeatherWithForcast = (key) => {

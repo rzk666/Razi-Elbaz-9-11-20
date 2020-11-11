@@ -35,12 +35,13 @@ const Favorite = ({
   return (
     <Link to={{
       pathname: '/',
-      location: {
+      currentFavorite: {
         key,
         city,
         country,
         isFavorite: true,
       },
+      favoriteFullData: data,
     }}
     >
       <AnimateOpacityHover>
