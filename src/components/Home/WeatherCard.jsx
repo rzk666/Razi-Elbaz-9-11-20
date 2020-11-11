@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 // Components
-import { Card, CircularProgress, withStyles } from '@material-ui/core';
+import {
+  Card,
+  CircularProgress,
+  withStyles,
+} from '@material-ui/core';
+import GoogleMap from '../common/GoogleMap';
 
 // Styles
 import styles from './WeatherCard.module.scss';
@@ -15,7 +20,7 @@ const WeatherContainer = withStyles({
     border: 0,
     height: '100%',
     width: '75%',
-    padding: '0 30px',
+    padding: '24px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -49,7 +54,7 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
         </div>
       </div>
       <div className={styles.map_container}>
-        MAP HERE
+        <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={8} />
       </div>
     </div>
   );

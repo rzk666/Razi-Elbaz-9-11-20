@@ -15,6 +15,7 @@ const config = {
   },
   credentials: {
     weatherApi: 'q4KARGiRRhZ409UDQrU8gdQAOgsaHnpS',
+    googleMaps: 'AIzaSyAFgNymaVaMnIGULfPPMNuNUpO6pqLvbIc',
   },
 };
 
