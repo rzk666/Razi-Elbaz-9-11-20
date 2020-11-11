@@ -41,7 +41,6 @@ const ToggleTemprature = withStyles({
 // ----- Main Component ----- //
 const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => {
   const x = 5;
-  console.log(tempratureType);
   return (
     <AppBar position="static">
       <div className={styles.navbar_content}>

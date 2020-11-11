@@ -10,6 +10,7 @@ const HomeView = ({
   fetchWeather,
   currentLocation,
   setCurrentLocation,
+  tempratureType,
 }) => (
   <div className={styles.wrapper}>
     <WeatherSearch
@@ -17,6 +18,7 @@ const HomeView = ({
       fetchWeather={fetchWeather}
     />
     <WeatherCard
+      tempratureType={tempratureType}
       currentLocation={currentLocation}
       currentWeather={weather}
     />

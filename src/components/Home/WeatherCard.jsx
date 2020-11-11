@@ -54,7 +54,7 @@ const Forecasts = ({ daily, isLoading }) => {
   );
 };
 
-const WeatherCard = ({ currentWeather, currentLocation }) => {
+const WeatherCard = ({ tempratureType, currentWeather, currentLocation }) => {
   const { data, forecast, isLoading } = currentWeather;
   const { headline, daily } = forecast;
   return (
