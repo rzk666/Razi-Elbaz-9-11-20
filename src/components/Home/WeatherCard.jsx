@@ -4,8 +4,17 @@ import {
   Card,
   CircularProgress,
   withStyles,
+  Tooltip,
 } from '@material-ui/core';
+import {
+  FavoriteBorder as FavoriteBorderIcon,
+  Favorite as FavoriteIcon,
+} from '@material-ui/icons';
 import GoogleMap from '../common/GoogleMap';
+// Animations
+import {
+  AnimateOpacityHover,
+} from '../common/Animations';
 
 // Styles
 import styles from './WeatherCard.module.scss';
@@ -26,6 +35,23 @@ const WeatherContainer = withStyles({
     alignItems: 'center',
   },
 })(Card);
+
+const FavoriteButton = ({ isFavorite, city }) => {
+  const tooltipText = isFavorite
+    ? `Add ${city} to favorites`
+    : `Remove ${city} from favorites`;
+  return (
+    <div className={styles.favorite_container}>
+      <AnimateOpacityHover>
+        <Tooltip title={tooltipText}>
+          { isFavorite
+            ? <FavoriteIcon color="error" />
+            : <FavoriteBorderIcon color="error" />}
+        </Tooltip>
+      </AnimateOpacityHover>
+    </div>
+  );
+};
 
 const WeatherContent = ({ data, currentLocation, tempratureType }) => {
   const {
@@ -52,6 +78,7 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
             alt="Weather Icon"
           />
         </div>
+        <FavoriteButton city={city} />
       </div>
       <div className={styles.map_container}>
         <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={8} />

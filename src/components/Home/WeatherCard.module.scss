@@ -46,6 +46,17 @@
         font-weight: bold;
       }
     }
+    .favorite_container{
+      width: 100px;
+      height: 100px;
+      svg{
+        &:hover{
+          cursor: pointer;
+        }
+        width: 80%;
+        height: 80%;
+      }
+    }
   }
   .map_container{
     flex: 1;
@@ -55,6 +66,6 @@
 
 .forecasts_container{
   background-color: yellow;
-  height: 50%;
+  height: 60%;
   width: 100%;
 }

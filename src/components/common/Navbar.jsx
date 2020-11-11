@@ -33,8 +33,12 @@ const ToggleTempratureGroup = withStyles({
 
 const ToggleTemprature = withStyles({
   root: {
-    border: '1px solid',
+    border: '1px solid white',
     borderRadius: 255,
+    color: 'rgba(255,255,255,0.5)',
+  },
+  selected: {
+    color: 'white!important',
   },
 })(ToggleButton);
 
