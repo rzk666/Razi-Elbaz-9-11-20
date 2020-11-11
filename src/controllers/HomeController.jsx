@@ -3,27 +3,33 @@ import React, { useEffect, useState } from 'react';
 
 const HomeController = (props) => {
   const {
-    // Global state
-    weather,
     // Redux actions
     fetchWeather,
     fetchForecast,
   } = props;
+
+  // ----- State ----- //
+  const [currentLocation, setCurrentLocation] = useState({
+    city: '',
+    country: '',
+  });
 
   // ----- useEffects ----- //
   useEffect(() => {
     console.log('MOUNT');
   }, []);
 
-  const fetchWeatherWithForcast = () => {
-    fetchWeather();
-    fetchForecast();
+  const fetchWeatherWithForcast = (key) => {
+    fetchWeather(key);
+    fetchForecast(key);
   };
 
   const { View } = props;
   return (
     <View
       {...props}
+      currentLocation={currentLocation}
+      setCurrentLocation={setCurrentLocation}
       fetchWeather={fetchWeatherWithForcast}
     />
   );

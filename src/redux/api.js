@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-expressions */
-// imports
+// Utils
 import HttpRequest from '../utils/HttpRequest';
-
+// Libs
+import { sleep } from '../common/libs';
 // TYPE
 export const API = 'API';
 
@@ -15,6 +16,8 @@ export const httpRequestAction = async (action, dispatch, token) => {
     success,
     failure,
     loader,
+    // This is for simulation purposes
+    fakeWaitTime,
   } = action.payload;
 
   const { base, endpoint } = url;
@@ -27,6 +30,7 @@ export const httpRequestAction = async (action, dispatch, token) => {
   if (Object.keys(params).length) { options.params = params; }
   try {
     const res = await HttpRequest(token)(options);
+    await sleep(fakeWaitTime || 1);
     dispatch(success(res.data));
     !loader || dispatch(loader(false));
   } catch (e) {

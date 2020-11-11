@@ -1,0 +1,87 @@
+.loader_container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no_location{
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+}
+
+.content_container{
+  flex: 1;
+  width: 100%;
+  display: flex;
+  .details_container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    h2{
+      padding: 0;
+      margin: 0;
+    }
+    p{
+      margin:0;
+      padding: 0;
+    }
+    .temprature_container{
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      img{
+        width: 100px;
+      }
+      span{
+        margin-right: 30px;
+        padding: 0;
+        font-size: 45px;
+        font-weight: bold;
+      }
+    }
+    .favorite_container{
+      width: 100px;
+      height: 100px;
+      svg{
+        &:hover{
+          cursor: pointer;
+        }
+        width: 80%;
+        height: 80%;
+      }
+    }
+  }
+  .map_container{
+    flex: 1;
+    position: relative;
+  }
+}
+
+.forecasts_container{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2{
+    margin: 0 0 10px 0;
+  }
+  h3{
+    opacity: 0.75;
+    font-size: 14px;
+  }
+  .forecasts_cards_container{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

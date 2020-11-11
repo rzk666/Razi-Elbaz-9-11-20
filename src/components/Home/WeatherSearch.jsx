@@ -15,7 +15,7 @@ const searchCities = (query) => HttpRequest()({
   url: 'https://testsh.free.beeceptor.com/getcities',
 });
 
-const WeatherSearch = ({ fetchWeather }) => {
+const WeatherSearch = ({ fetchWeather, setCurrentLocation }) => {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -37,21 +37,29 @@ const WeatherSearch = ({ fetchWeather }) => {
     if (!searchValue) {
       setOptions([]);
     } else {
-      getCities(searchValue);
+      const wasCitySelected = options.find((option) => option.LocalizedName === searchValue);
+      if (!wasCitySelected) {
+        getCities(searchValue);
+      }
     }
   }, [searchValue]);
 
   return (
     <Autocomplete
+      style={{ width: '40%', marginBottom: '30px' }}
       filterOptions={(x) => x}
-      fullWidth
-      color="red"
       options={options}
       getOptionLabel={(option) => option.LocalizedName || ''}
       onInputChange={(e, newValue) => setSearchValue(newValue)}
       onChange={(e, selectedValue) => {
-        const { Key } = selectedValue;
-        fetchWeather(Key);
+        if (selectedValue) {
+          const { Key, LocalizedName, Country } = selectedValue;
+          fetchWeather(Key);
+          setCurrentLocation({
+            city: LocalizedName,
+            country: Country.LocalizedName,
+          });
+        }
       }}
       freeSolo
       renderInput={(props) => (
