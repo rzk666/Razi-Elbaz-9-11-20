@@ -8,10 +8,18 @@ import styles from './HomeView.module.scss';
 const HomeView = ({
   weather,
   fetchWeather,
+  currentLocation,
+  setCurrentLocation,
 }) => (
   <div className={styles.wrapper}>
-    <WeatherSearch fetchWeather={fetchWeather} />
-    <WeatherCard currentWeather={weather} />
+    <WeatherSearch
+      setCurrentLocation={setCurrentLocation}
+      fetchWeather={fetchWeather}
+    />
+    <WeatherCard
+      currentLocation={currentLocation}
+      currentWeather={weather}
+    />
   </div>
 );
 

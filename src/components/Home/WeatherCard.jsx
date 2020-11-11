@@ -19,10 +19,19 @@ const WeatherContainer = withStyles({
   },
 })(Card);
 
-const Forecasts = ({ daily }) => {
+const WeatherContent = () => {
   const x = 5;
   return (
-    <div>
+    <div className={styles.content_container}>
+      Content
+    </div>
+  );
+};
+
+const Forecasts = ({ daily, isLoading }) => {
+  const x = 5;
+  return (
+    <div className={styles.forecasts_container}>
       forecasts
     </div>
   );
@@ -34,16 +43,20 @@ const WeatherCard = ({ currentWeather }) => {
   return (
     <WeatherContainer>
       <>
-        { isLoading ? <CircularProgress />
+        { isLoading
+          ? (
+            <div className={styles.loader_container}>
+              <CircularProgress size={40} />
+            </div>
+          )
           : (
             <>
-              <div className={styles.top_bar_container}>
-                top bar
-              </div>
-              <div className={styles.content}>
-                Content
-              </div>
-              <Forecasts isLoading={forecast.isLoading} daily={daily} />
+              <WeatherContent />
+              <Forecasts
+                isLoading={forecast.isLoading}
+                headline={headline}
+                daily={daily}
+              />
             </>
           ) }
       </>

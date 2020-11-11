@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 
 const HomeController = (props) => {
   const {
-    // Global state
-    weather,
     // Redux actions
     fetchWeather,
     fetchForecast,
   } = props;
+
+  // ----- State ----- //
+  const [currentLocation, setCurrentLocation] = useState({
+    city: '',
+    country: '',
+  });
 
   // ----- useEffects ----- //
   useEffect(() => {
@@ -24,6 +28,8 @@ const HomeController = (props) => {
   return (
     <View
       {...props}
+      currentLocation={currentLocation}
+      setCurrentLocation={setCurrentLocation}
       fetchWeather={fetchWeatherWithForcast}
     />
   );
