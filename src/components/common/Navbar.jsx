@@ -6,8 +6,9 @@ import { HOME, FAVORITES } from '../../universal/pages';
 // Components
 import {
   AppBar,
-  Typography,
+  withStyles,
 } from '@material-ui/core';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 // Animations
 import { AnimateOpacityHover, AnimateScaleClick } from './Animations';
 // Icons
@@ -15,15 +16,32 @@ import { Brightness4 as ThemeSwitch } from '@material-ui/icons';
 // Styles
 import styles from './Navbar.module.scss';
 
+// ----- Help Components ----- //
 const NavbarLink = ({ to, isActive, children }) => (
   <AnimateOpacityHover>
     <Link to={to} active={isActive}>{children}</Link>
   </AnimateOpacityHover>
 );
 
-// TODO -> Handle mobile version later
-const Navbar = ({ isMobile, toggleDarkMode }) => {
+const ToggleTempratureGroup = withStyles({
+  root: {
+    marginLeft: 'auto',
+    marginRight: '20px',
+    height: '80%',
+  },
+})(ToggleButtonGroup);
+
+const ToggleTemprature = withStyles({
+  root: {
+    border: '1px solid',
+    borderRadius: 255,
+  },
+})(ToggleButton);
+
+// ----- Main Component ----- //
+const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => {
   const x = 5;
+  console.log(tempratureType);
   return (
     <AppBar position="static">
       <div className={styles.navbar_content}>
@@ -31,6 +49,14 @@ const Navbar = ({ isMobile, toggleDarkMode }) => {
           <NavbarLink to="/" active>Home</NavbarLink>
           <NavbarLink to={`/${FAVORITES}`} active={false}>Favorites</NavbarLink>
         </div>
+        <ToggleTempratureGroup
+          exclusive
+          value={tempratureType}
+          onChange={(e, newType) => setTempratureType(newType)}
+        >
+          <ToggleTemprature value="F">°F</ToggleTemprature>
+          <ToggleTemprature value="C">°C</ToggleTemprature>
+        </ToggleTempratureGroup>
         <AnimateOpacityHover>
           <AnimateScaleClick>
             <ThemeSwitch onClick={() => toggleDarkMode()} />

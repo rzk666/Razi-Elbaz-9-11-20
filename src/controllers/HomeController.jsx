@@ -13,6 +13,7 @@ const HomeController = (props) => {
     city: '',
     country: '',
   });
+  const [tempratureType, setTempratureType] = useState('F');
 
   // ----- useEffects ----- //
   useEffect(() => {
@@ -29,6 +30,8 @@ const HomeController = (props) => {
     <View
       {...props}
       currentLocation={currentLocation}
+      tempratureType={tempratureType}
+      setTempratureType={setTempratureType}
       setCurrentLocation={setCurrentLocation}
       fetchWeather={fetchWeatherWithForcast}
     />

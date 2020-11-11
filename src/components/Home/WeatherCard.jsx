@@ -19,15 +19,24 @@ const WeatherContainer = withStyles({
   },
 })(Card);
 
-const WeatherContent = ({ data, currentLocation }) => {
+const WeatherContent = ({ data, currentLocation, tempratureType }) => {
   const {
-    Link, WeatherIcon, WeatherText, Temprature,
+    WeatherIcon,
+    WeatherText,
+    Temperature,
+    LocalObservationDateTime,
   } = data;
+  const { Imperial } = Temperature;
+  const { Value } = Imperial;
+  const formattedDate = new Date(LocalObservationDateTime).toDateString();
   const { city, country } = currentLocation;
   return (
     <div className={styles.content_container}>
       <div className={styles.details_container}>
-        Details
+        <h2>{`${city}, ${country}`}</h2>
+        <p>{formattedDate}</p>
+        <p>{WeatherText}</p>
+        <span>{`${Value} °${tempratureType}`}</span>
       </div>
       <div className={styles.map_container}>
         MAP HERE

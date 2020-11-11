@@ -20,6 +20,7 @@ const darkPalette = {
 const WithLayoutHOC = (ComposedComponent) => {
   const WithLayout = (props) => {
     const [darkMode, toggleDarkMode] = useState(false);
+    const [tempratureType, setTempratureType] = useState('F');
     const theme = createMuiTheme({
       palette: darkMode ? { ...darkPalette } : {},
       overrides: {
@@ -42,8 +43,15 @@ const WithLayoutHOC = (ComposedComponent) => {
           flexDirection: 'column',
         }}
         >
-          <Navbar toggleDarkMode={() => toggleDarkMode(!darkMode)} />
-          <ComposedComponent {...props} />
+          <Navbar
+            toggleDarkMode={() => toggleDarkMode(!darkMode)}
+            setTempratureType={setTempratureType}
+            tempratureType={tempratureType}
+          />
+          <ComposedComponent
+            tempratureType={tempratureType}
+            {...props}
+          />
         </Paper>
       </ThemeProvider>
     );
