@@ -18,6 +18,7 @@ const FavoritesView = ({
   tempratureType,
 }) => (
   <div className={styles.wrapper}>
+    {!favorites.length && 'You haven\'t selected any favorite cities'}
     {favorites.map((favorite) => {
       if (typeof favorite === 'string') {
         return (
