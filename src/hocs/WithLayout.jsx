@@ -35,7 +35,13 @@ const WithLayoutHOC = (ComposedComponent) => {
     });
     return (
       <ThemeProvider theme={theme}>
-        <Paper style={{ height: '100vh', width: '100vw' }}>
+        <Paper style={{
+          height: '100vh',
+          width: '100vw',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+        >
           <Navbar toggleDarkMode={() => toggleDarkMode(!darkMode)} />
           <ComposedComponent {...props} />
         </Paper>

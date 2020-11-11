@@ -10,9 +10,7 @@ const HomeView = ({
   fetchWeather,
 }) => (
   <div className={styles.wrapper}>
-    <div className={styles.search_container}>
-      <WeatherSearch fetchWeather={fetchWeather} />
-    </div>
+    <WeatherSearch fetchWeather={fetchWeather} />
     <WeatherCard currentWeather={weather} />
   </div>
 );

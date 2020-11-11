@@ -46,8 +46,8 @@ const WeatherSearch = ({ fetchWeather }) => {
 
   return (
     <Autocomplete
+      style={{ width: '40%', marginBottom: '30px' }}
       filterOptions={(x) => x}
-      fullWidth
       options={options}
       getOptionLabel={(option) => option.LocalizedName || ''}
       onInputChange={(e, newValue) => setSearchValue(newValue)}

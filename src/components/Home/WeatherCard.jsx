@@ -10,12 +10,12 @@ const WeatherContainer = withStyles({
   root: {
     borderRadius: 5,
     border: 0,
-    height: 800,
+    height: '100%',
     width: '75%',
     padding: '0 30px',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 })(Card);
 
@@ -43,7 +43,7 @@ const WeatherCard = ({ currentWeather }) => {
               <div className={styles.content}>
                 Content
               </div>
-              <Forecasts daily={daily} />
+              <Forecasts isLoading={forecast.isLoading} daily={daily} />
             </>
           ) }
       </>

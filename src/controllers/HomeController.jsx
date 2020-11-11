@@ -15,9 +15,9 @@ const HomeController = (props) => {
     console.log('MOUNT');
   }, []);
 
-  const fetchWeatherWithForcast = () => {
-    fetchWeather();
-    fetchForecast();
+  const fetchWeatherWithForcast = (key) => {
+    fetchWeather(key);
+    fetchForecast(key);
   };
 
   const { View } = props;
