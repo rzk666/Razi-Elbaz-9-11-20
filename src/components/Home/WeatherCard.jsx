@@ -79,7 +79,7 @@ const WeatherContent = ({
   const { Value } = Imperial;
   const formattedDate = new Date(LocalObservationDateTime).toDateString();
   const formattedTemprature = tempratureType === 'F' ? Value : getCelcious(Value);
-  const { city, country } = currentLocation;
+  const { city, country, isFavorite } = currentLocation;
   return (
     <div className={styles.content_container}>
       <div className={styles.details_container}>
@@ -96,6 +96,7 @@ const WeatherContent = ({
         <FavoriteButton
           toggleFavorite={toggleFavorite}
           city={city}
+          isFavorite={isFavorite}
         />
       </div>
       <div className={styles.map_container}>

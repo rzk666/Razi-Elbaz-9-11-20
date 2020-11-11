@@ -13,7 +13,7 @@ const HomeController = (props) => {
   //   const { location } = history;
   //   const { selectedFavorite } = location;
 
-  const favoritesList = JSON.parse(localStorage.getItem('favorites'));
+  const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
 
   // ----- State ----- //
   const [currentLocation, setCurrentLocation] = useState({
@@ -25,12 +25,12 @@ const HomeController = (props) => {
 
   // ----- useEffects ----- //
   useEffect(() => {
-    console.log('MOUNT');
+
   }, []);
 
   useEffect(() => {
     const { key } = currentLocation;
-    const isFavorite = !!favoritesList.find((x) => key);
+    const isFavorite = !!favoritesList.find((x) => x === key);
     setCurrentLocation({
       ...currentLocation,
       isFavorite,
@@ -48,7 +48,7 @@ const HomeController = (props) => {
     if (!isFavorite) {
       localStorage.setItem('favorites', JSON.stringify([...favoritesList, key]));
     } else {
-      localStorage.setItem('favorites', JSON.parse(favoritesList.filter((x) => x !== key)));
+      localStorage.setItem('favorites', JSON.stringify(favoritesList.filter((x) => x !== key)));
     }
     setCurrentLocation({
       ...currentLocation,
