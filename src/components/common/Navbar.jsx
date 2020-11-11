@@ -51,7 +51,11 @@ const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => {
         <ToggleTempratureGroup
           exclusive
           value={tempratureType}
-          onChange={(e, newType) => setTempratureType(newType)}
+          onChange={(e, newType) => {
+            if (newType) {
+              setTempratureType(newType);
+            }
+          }}
         >
           <ToggleTemprature value="F">°F</ToggleTemprature>
           <ToggleTemprature value="C">°C</ToggleTemprature>

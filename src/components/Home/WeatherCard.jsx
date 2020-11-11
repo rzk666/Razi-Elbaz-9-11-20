@@ -5,6 +5,9 @@ import { Card, CircularProgress, withStyles } from '@material-ui/core';
 // Styles
 import styles from './WeatherCard.module.scss';
 
+// ----- Help Functions ----- //
+const getCelcious = (value) => Math.round((value - 32) / 1.8);
+
 // ----- Help Components ----- //
 const WeatherContainer = withStyles({
   root: {
@@ -29,6 +32,7 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
   const { Imperial } = Temperature;
   const { Value } = Imperial;
   const formattedDate = new Date(LocalObservationDateTime).toDateString();
+  const formattedTemprature = tempratureType === 'F' ? Value : getCelcious(Value);
   const { city, country } = currentLocation;
   return (
     <div className={styles.content_container}>
@@ -36,7 +40,13 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
         <h2>{`${city}, ${country}`}</h2>
         <p>{formattedDate}</p>
         <p>{WeatherText}</p>
-        <span>{`${Value} °${tempratureType}`}</span>
+        <div className={styles.temprature_container}>
+          <span>{`${formattedTemprature} °${tempratureType}`}</span>
+          <img
+            src={`https://developer.accuweather.com/sites/default/files/${WeatherIcon}-s.png`}
+            alt="Weather Icon"
+          />
+        </div>
       </div>
       <div className={styles.map_container}>
         MAP HERE
@@ -54,7 +64,11 @@ const Forecasts = ({ daily, isLoading }) => {
   );
 };
 
-const WeatherCard = ({ tempratureType, currentWeather, currentLocation }) => {
+const WeatherCard = ({
+  tempratureType,
+  currentWeather,
+  currentLocation,
+}) => {
   const { data, forecast, isLoading } = currentWeather;
   const { headline, daily } = forecast;
   return (
@@ -77,6 +91,7 @@ const WeatherCard = ({ tempratureType, currentWeather, currentLocation }) => {
                 : (
                   <>
                     <WeatherContent
+                      tempratureType={tempratureType}
                       currentLocation={currentLocation}
                       data={data}
                     />
