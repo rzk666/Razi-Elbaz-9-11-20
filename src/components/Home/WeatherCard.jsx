@@ -79,7 +79,11 @@ const WeatherContent = ({
   const { Value } = Imperial;
   const formattedDate = new Date(LocalObservationDateTime).toDateString();
   const formattedTemprature = tempratureType === 'F' ? Value : getCelcious(Value);
-  const { city, country, isFavorite } = currentLocation;
+  const {
+    city, country, isFavorite, coords,
+  } = currentLocation;
+  const { latitude, longitude } = coords;
+
   return (
     <div className={styles.content_container}>
       <div className={styles.details_container}>
@@ -100,7 +104,7 @@ const WeatherContent = ({
         />
       </div>
       <div className={styles.map_container}>
-        <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={3} />
+        <GoogleMap geo={{ lat: latitude, lng: longitude }} zoom={3} />
       </div>
     </div>
   );
