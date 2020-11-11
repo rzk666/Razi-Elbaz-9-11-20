@@ -17,12 +17,10 @@ import Forecast from '../common/Forecast';
 import {
   AnimateOpacityHover,
 } from '../common/Animations';
-
+// Libs
+import { getCelcious } from '../../common/libs';
 // Styles
 import styles from './WeatherCard.module.scss';
-
-// ----- Help Functions ----- //
-const getCelcious = (value) => Math.round((value - 32) / 1.8);
 
 // ----- Help Components ----- //
 const WeatherContainer = withStyles({

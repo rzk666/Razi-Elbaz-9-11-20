@@ -2,6 +2,8 @@ import React from 'react';
 // Components
 import { Skeleton } from '@material-ui/lab';
 import { Card, withStyles } from '@material-ui/core';
+// Libs
+import { getCelcious } from '../../common/libs';
 // Styles
 import styles from './Forecast.module.scss';
 
@@ -16,7 +18,7 @@ const ForecastContainer = withStyles({
     border: 0,
     height: FORECAST_HEIGHT,
     width: FORECAST_WIDTH,
-    padding: '24px',
+    padding: '16px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -24,9 +26,18 @@ const ForecastContainer = withStyles({
 })(Card);
 
 // ----- Main Component ----- //
-const Forecast = ({ data, isLoading, tempratureType }) => {
-  const x = 5;
-  const { Day, Night, Temprature } = data;
+const Forecast = ({
+  data, isLoading, tempratureType,
+}) => {
+  const { Day, Temperature } = data;
+  const { Maximum, Minimum } = Temperature;
+  const formattedTempratures = {
+    min: tempratureType === 'F' ? Minimum.Value : getCelcious(Minimum.Value),
+    max: tempratureType === 'F' ? Maximum.Value : getCelcious(Maximum.Value),
+  };
+  const { Icon, IconPhrase } = Day;
+  const iconId = Icon / 10 >= 1 ? Icon : `0${Icon}`;
+  // const statusImageSrc =
   const formattedDate = new Date(data.Date).toDateString();
   if (isLoading) {
     return (
@@ -38,8 +49,15 @@ const Forecast = ({ data, isLoading, tempratureType }) => {
     );
   }
   return (
-    <ForecastContainer>
-      test
+    <ForecastContainer className={styles.container}>
+      <h2 className={styles.title}>{formattedDate}</h2>
+      <div className={styles.details_container}>
+        <img src={`https://developer.accuweather.com/sites/default/files/${iconId}-s.png`} alt="" />
+        <p>{IconPhrase}</p>
+      </div>
+      <div className={styles.temprature}>
+        {`${formattedTempratures.min}°${tempratureType} - ${formattedTempratures.max}°${tempratureType}`}
+      </div>
     </ForecastContainer>
   );
 };
