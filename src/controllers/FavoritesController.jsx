@@ -4,12 +4,20 @@ import React, { useEffect, useState } from 'react';
 import HttpRequest from '../utils/HttpRequest';
 // Config
 import config from '../common/config';
+import { sleep } from '../common/libs';
 
 const getWeatherByKey = (key) => HttpRequest()({
   method: 'get',
   // This is the url for production
   // url: `${config.api.url}/currentconditions/v1/${key}?apikey=${config.credentials.weatherApi}`,
   url: 'https://testsh.free.beeceptor.com/getweather',
+});
+
+const getLocationsByKey = (key) => HttpRequest()({
+  method: 'get',
+  // This is the url for production
+  // url: `${config.api.url}/locations/v1/${key}?apikey=${config.credentials.weatherApi}`,
+  url: 'https://testsh.free.beeceptor.com/getlocation',
 });
 
 const FavoritesController = (props) => {
@@ -25,8 +33,17 @@ const FavoritesController = (props) => {
   // ----- Help Functions ----- //
   const getFavoriteData = async (favoriteKey) => {
     try {
-      const favoriteData = await getWeatherByKey(favoriteKey);
-      setFavoritesData({ ...favoriteData, key: favoriteKey });
+      const weatherResponse = await getWeatherByKey(favoriteKey);
+      const favoriteData = weatherResponse.data[0];
+      const locationResponse = await getLocationsByKey(favoriteKey);
+      const locationData = locationResponse.data;
+      const { LocalizedName, Country } = locationData;
+      setFavoritesData({
+        ...favoriteData,
+        key: favoriteKey,
+        city: LocalizedName,
+        country: Country.LocalizedName,
+      });
     } catch (e) {
     // Handle error
       console.log('err');
@@ -42,8 +59,9 @@ const FavoritesController = (props) => {
     });
   }, []);
 
+  // Add new favorite data when its recived from the server
   useEffect(() => {
-    if (Object.keys(favoritesData)) {
+    if (Object.keys(favoritesData).length) {
       const newFavorites = favorites.filter((key) => favoritesData.key !== key);
       newFavorites.push(favoritesData);
       setFavorites(newFavorites);
