@@ -32,6 +32,12 @@ const WithLayoutHOC = (ComposedComponent) => {
             : '0 3px 5px 2px rgba(0, 0, 0, .3)',
           },
         },
+        MuiDivider: {
+          root: {
+            width: '100%',
+            margin: '10px 0',
+          },
+        },
       },
     });
     return (

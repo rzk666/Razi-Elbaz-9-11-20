@@ -5,12 +5,14 @@ import {
   CircularProgress,
   withStyles,
   Tooltip,
+  Divider,
 } from '@material-ui/core';
 import {
   FavoriteBorder as FavoriteBorderIcon,
   Favorite as FavoriteIcon,
 } from '@material-ui/icons';
 import GoogleMap from '../common/GoogleMap';
+import Forecast from '../common/Forecast';
 // Animations
 import {
   AnimateOpacityHover,
@@ -35,6 +37,12 @@ const WeatherContainer = withStyles({
     alignItems: 'center',
   },
 })(Card);
+
+const Loader = () => (
+  <div className={styles.loader_container}>
+    <CircularProgress size={40} />
+  </div>
+);
 
 const FavoriteButton = ({ isFavorite, city }) => {
   const tooltipText = isFavorite
@@ -87,15 +95,31 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
   );
 };
 
-const Forecasts = ({ daily, isLoading }) => {
-  const x = 5;
+const Forecasts = ({
+  tempratureType,
+  daily,
+  isLoading,
+  headline,
+}) => {
+  const { Text } = headline;
   return (
     <div className={styles.forecasts_container}>
-      forecasts
+      <h2>5 Days Forecast</h2>
+      <div className={styles.forecasts_cards_container}>
+        {daily.map((forecast) => (
+          <Forecast
+            tempratureType={tempratureType}
+            isLoading={isLoading}
+            data={forecast}
+          />
+        ))}
+      </div>
+      {Text && <h3>{`*${Text}`}</h3>}
     </div>
   );
 };
 
+// ----- Main Component ----- //
 const WeatherCard = ({
   tempratureType,
   currentWeather,
@@ -108,9 +132,7 @@ const WeatherCard = ({
       <>
         { isLoading
           ? (
-            <div className={styles.loader_container}>
-              <CircularProgress size={40} />
-            </div>
+            <Loader />
           )
           : (
             <>
@@ -127,7 +149,9 @@ const WeatherCard = ({
                       currentLocation={currentLocation}
                       data={data}
                     />
+                    <Divider />
                     <Forecasts
+                      tempratureType={tempratureType}
                       isLoading={forecast.isLoading}
                       headline={headline}
                       daily={daily}

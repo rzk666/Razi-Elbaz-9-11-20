@@ -65,7 +65,23 @@
 }
 
 .forecasts_container{
-  background-color: yellow;
   height: 60%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2{
+    margin: 0 0 10px 0;
+  }
+  h3{
+    opacity: 0.75;
+    font-size: 14px;
+  }
+  .forecasts_cards_container{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
