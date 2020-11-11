@@ -14,15 +14,12 @@ const HomeController = (props) => {
   const { location } = history;
   const { currentFavorite, favoriteFullData } = location;
 
+  // Localstorage
   const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
+  const lastLocationState = JSON.parse(localStorage.getItem('lastLocation')) || {};
 
   // ----- State ----- //
-  const [currentLocation, setCurrentLocation] = useState({
-    city: '',
-    country: '',
-    key: '',
-    isFavorite: false,
-  });
+  const [currentLocation, setCurrentLocation] = useState(lastLocationState);
 
   // ----- useEffects ----- //
   useEffect(() => {
@@ -38,6 +35,7 @@ const HomeController = (props) => {
   useEffect(() => {
     const { isFavorite, key } = currentLocation;
     if (key) {
+      localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
       setCurrentLocation({
         ...currentLocation,
         isFavorite,
