@@ -12,7 +12,7 @@ import {
   Favorite as FavoriteIcon,
 } from '@material-ui/icons';
 import GoogleMap from '../common/GoogleMap';
-import Forecast from '../common/Forecast';
+import Forecast from './Forecast';
 // Animations
 import {
   AnimateOpacityHover,

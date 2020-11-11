@@ -21,9 +21,10 @@ export const forecastIsLoading = (isLoading) => ({
   isLoading,
 });
 
-export const weatherGetData = (data) => ({
+export const weatherGetData = (data, key) => ({
   type: WEATHER_GET_DATA,
   data,
+  key,
 });
 
 export const forecastGetData = (data) => ({
@@ -45,7 +46,7 @@ export const fetchWeather = (key) => (api({
     },
     method: 'get',
     fakeWaitTime: 1250,
-    success: (data) => weatherGetData(data),
+    success: (data) => weatherGetData(data, key),
     failure: (data) => weatherHasError(data),
     loader: (data) => weatherIsLoading(data),
   },
