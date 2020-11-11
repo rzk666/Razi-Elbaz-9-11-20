@@ -6,7 +6,6 @@ import { Paper } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // ----- MUI Palletes ----- //
-
 const darkPalette = {
   type: 'dark',
   primary: {
