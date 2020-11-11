@@ -19,11 +19,19 @@ const WeatherContainer = withStyles({
   },
 })(Card);
 
-const WeatherContent = () => {
-  const x = 5;
+const WeatherContent = ({ data, currentLocation }) => {
+  const {
+    Link, WeatherIcon, WeatherText, Temprature,
+  } = data;
+  const { city, country } = currentLocation;
   return (
     <div className={styles.content_container}>
-      Content
+      <div className={styles.details_container}>
+        Details
+      </div>
+      <div className={styles.map_container}>
+        MAP HERE
+      </div>
     </div>
   );
 };
@@ -37,7 +45,7 @@ const Forecasts = ({ daily, isLoading }) => {
   );
 };
 
-const WeatherCard = ({ currentWeather }) => {
+const WeatherCard = ({ currentWeather, currentLocation }) => {
   const { data, forecast, isLoading } = currentWeather;
   const { headline, daily } = forecast;
   return (
@@ -51,12 +59,25 @@ const WeatherCard = ({ currentWeather }) => {
           )
           : (
             <>
-              <WeatherContent />
-              <Forecasts
-                isLoading={forecast.isLoading}
-                headline={headline}
-                daily={daily}
-              />
+              { !Object.keys(data).length
+                ? (
+                  <div className={styles.no_location}>
+                    Please select a location to get the weather forecast
+                  </div>
+                )
+                : (
+                  <>
+                    <WeatherContent
+                      currentLocation={currentLocation}
+                      data={data}
+                    />
+                    <Forecasts
+                      isLoading={forecast.isLoading}
+                      headline={headline}
+                      daily={daily}
+                    />
+                  </>
+                )}
             </>
           ) }
       </>

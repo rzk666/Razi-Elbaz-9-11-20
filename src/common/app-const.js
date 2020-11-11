@@ -4,7 +4,7 @@ export const INITIAL_STATE = {
     isLoading: false,
     hasError: false,
     error: '',
-    data: [],
+    data: {},
     forecast: {
       isLoading: false,
       headline: {},

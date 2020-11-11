@@ -6,10 +6,28 @@
   align-items: center;
 }
 
+.no_location{
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+}
+
 .content_container{
   flex: 1;
   width: 100%;
-  background-color: red;
+  display: flex;
+  .details_container{
+    flex: 1;
+    background-color: red;
+  }
+  .map_container{
+    flex: 1;
+    background-color: green;
+  }
 }
 
 .forecasts_container{
