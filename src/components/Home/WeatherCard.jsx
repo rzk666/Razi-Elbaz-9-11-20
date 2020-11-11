@@ -42,12 +42,16 @@ const Loader = () => (
   </div>
 );
 
-const FavoriteButton = ({ isFavorite, city }) => {
-  const tooltipText = isFavorite
+const FavoriteButton = ({
+  city,
+  isFavorite,
+  toggleFavorite,
+}) => {
+  const tooltipText = !isFavorite
     ? `Add ${city} to favorites`
     : `Remove ${city} from favorites`;
   return (
-    <div className={styles.favorite_container}>
+    <div onClick={() => toggleFavorite()} className={styles.favorite_container}>
       <AnimateOpacityHover>
         <Tooltip title={tooltipText}>
           { isFavorite
@@ -59,7 +63,12 @@ const FavoriteButton = ({ isFavorite, city }) => {
   );
 };
 
-const WeatherContent = ({ data, currentLocation, tempratureType }) => {
+const WeatherContent = ({
+  data,
+  currentLocation,
+  tempratureType,
+  toggleFavorite,
+}) => {
   const {
     WeatherIcon,
     WeatherText,
@@ -84,10 +93,13 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
             alt="Weather Icon"
           />
         </div>
-        <FavoriteButton city={city} />
+        <FavoriteButton
+          toggleFavorite={toggleFavorite}
+          city={city}
+        />
       </div>
       <div className={styles.map_container}>
-        <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={8} />
+        <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={3} />
       </div>
     </div>
   );
@@ -122,6 +134,7 @@ const WeatherCard = ({
   tempratureType,
   currentWeather,
   currentLocation,
+  toggleFavorite,
 }) => {
   const { data, forecast, isLoading } = currentWeather;
   const { headline, daily } = forecast;
@@ -143,6 +156,7 @@ const WeatherCard = ({
                 : (
                   <>
                     <WeatherContent
+                      toggleFavorite={toggleFavorite}
                       tempratureType={tempratureType}
                       currentLocation={currentLocation}
                       data={data}

@@ -58,6 +58,7 @@ const WeatherSearch = ({ fetchWeather, setCurrentLocation }) => {
           setCurrentLocation({
             city: LocalizedName,
             country: Country.LocalizedName,
+            key: Key,
           });
         }
       }}

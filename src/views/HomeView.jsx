@@ -11,6 +11,7 @@ const HomeView = ({
   currentLocation,
   setCurrentLocation,
   tempratureType,
+  toggleFavorite,
 }) => (
   <div className={styles.wrapper}>
     <WeatherSearch
@@ -18,6 +19,7 @@ const HomeView = ({
       fetchWeather={fetchWeather}
     />
     <WeatherCard
+      toggleFavorite={toggleFavorite}
       tempratureType={tempratureType}
       currentLocation={currentLocation}
       currentWeather={weather}
