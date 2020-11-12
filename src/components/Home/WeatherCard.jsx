@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Components
 import {
   Card,
@@ -18,7 +18,7 @@ import {
   AnimateOpacityHover,
 } from '../common/Animations';
 // Libs
-import { getCelcious } from '../../common/libs';
+import { getCelcious, getIconId } from '../../common/libs';
 // Styles
 import styles from './WeatherCard.module.scss';
 
@@ -93,7 +93,7 @@ const WeatherContent = ({
         <div className={styles.temprature_container}>
           <span>{`${formattedTemprature} °${tempratureType}`}</span>
           <img
-            src={`https://developer.accuweather.com/sites/default/files/${WeatherIcon}-s.png`}
+            src={`https://developer.accuweather.com/sites/default/files/${getIconId(WeatherIcon)}-s.png`}
             alt="Weather Icon"
           />
         </div>

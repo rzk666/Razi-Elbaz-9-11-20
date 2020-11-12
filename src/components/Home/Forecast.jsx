@@ -3,7 +3,7 @@ import React from 'react';
 import { Skeleton } from '@material-ui/lab';
 import { Card, withStyles } from '@material-ui/core';
 // Libs
-import { getCelcious } from '../../common/libs';
+import { getCelcious, getIconId } from '../../common/libs';
 // Styles
 import styles from './Forecast.module.scss';
 
@@ -45,13 +45,12 @@ const Forecast = ({
     max: tempratureType === 'F' ? Maximum.Value : getCelcious(Maximum.Value),
   };
   const { Icon, IconPhrase } = Day;
-  const iconId = Icon / 10 >= 1 ? Icon : `0${Icon}`;
   const formattedDate = new Date(data.Date).toDateString();
   return (
     <ForecastContainer className={styles.container}>
       <h2 className={styles.title}>{formattedDate}</h2>
       <div className={styles.details_container}>
-        <img src={`https://developer.accuweather.com/sites/default/files/${iconId}-s.png`} alt="" />
+        <img src={`https://developer.accuweather.com/sites/default/files/${getIconId(Icon)}-s.png`} alt="" />
         <p>{IconPhrase}</p>
       </div>
       <div className={styles.temprature}>

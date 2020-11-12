@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 // Libs
-import { getCelcious } from '../../common/libs';
+import { getCelcious, getIconId } from '../../common/libs';
 // Animations
 import { AnimateOpacityHover, AnimateScaleClick } from '../common/Animations';
 // Styles
@@ -31,7 +31,6 @@ const Favorite = ({
   const { Imperial } = Temperature;
   const { Value } = Imperial;
   const formattedTemperature = tempratureType === 'F' ? Value : getCelcious(Value);
-  const iconId = WeatherIcon / 10 >= 1 ? WeatherIcon : `0${WeatherIcon}`;
   return (
     <Link to={{
       pathname: '/',
@@ -50,7 +49,7 @@ const Favorite = ({
           <FavoriteContainer className={styles.container} style={style}>
             <h2 className={styles.title}>{city}</h2>
             <div className={styles.details_container}>
-              <img src={`https://developer.accuweather.com/sites/default/files/${iconId}-s.png`} alt="" />
+              <img src={`https://developer.accuweather.com/sites/default/files/${getIconId(WeatherIcon)}-s.png`} alt="" />
               <p>{WeatherText}</p>
             </div>
             <div className={styles.temprature}>
