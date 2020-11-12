@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 // Utils
 import { useHistory } from 'react-router-dom';
-import HttpRequest from '../utils/HttpRequest';
+// API
+import { fetchByGeoLocation } from '../common/api-requests';
 // Components
 import ErrorToast from '../components/common/ErrorToast';
-
-// ----- Help Functions ----- //
-const fetchByGeoLocation = (lat, lng) => HttpRequest()({
-  method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/locations/v1/cities/geoposition/search?apikey=${config.credentials.weatherApi}&q=${lat},${lng}`,
-  url: 'https://testsh.free.beeceptor.com/getgeo',
-});
 
 const HomeController = (props) => {
   const {
@@ -36,13 +29,14 @@ const HomeController = (props) => {
   const lastLocationState = JSON.parse(localStorage.getItem('lastLocation'));
 
   // ----- State ----- //
-  const [currentLocation, setCurrentLocation] = useState(lastLocationState || {
+  const initialState = currentFavorite || lastLocationState || {
     city: '',
     key: '',
     country: '',
     isFavorite: false,
     coords: {},
-  });
+  };
+  const [currentLocation, setCurrentLocation] = useState(initialState);
 
   // ----- Callbacks ----- //
   const fetchWeatherWithForcast = (key) => {
@@ -68,10 +62,11 @@ const HomeController = (props) => {
   useEffect(() => {
     // This means we got here by clicking on a favorite on the favorites page
     if (currentFavorite) {
-      const { key } = currentFavorite;
+      const {
+        key,
+      } = currentFavorite;
       weatherGetData(favoriteFullData, key);
       fetchForecast(key);
-      setCurrentLocation(currentFavorite);
     } else if (!Object.keys(weather.data).length) {
       navigator.geolocation.getCurrentPosition(async (geoLocationData) => {
         if (geoLocationData) {
@@ -105,6 +100,7 @@ const HomeController = (props) => {
 
   useEffect(() => {
     localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
+    // console.log(currentLocation);
   }, [currentLocation]);
 
   return (

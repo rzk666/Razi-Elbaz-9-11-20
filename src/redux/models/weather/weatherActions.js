@@ -42,8 +42,8 @@ export const fetchWeather = (key) => (api({
   type: API,
   payload: {
     url: {
-      base: 'https://testsh.free.beeceptor.com/getweather', // config.api
-      endpoint: '',
+      base: config.api.url,
+      endpoint: `/currentconditions/v1/${key}?apikey=${config.credentials.weatherApi}`,
     },
     method: 'get',
     fakeWaitTime: 1250,
@@ -57,8 +57,8 @@ export const fetchForecast = (key) => (api({
   type: API,
   payload: {
     url: {
-      base: 'https://testsh.free.beeceptor.com/getforecast', // config.api
-      endpoint: '',
+      base: config.api.url,
+      endpoint: `/forecasts/v1/daily/5day/${key}?apikey=${config.credentials.weatherApi}`,
     },
     method: 'get',
     fakeWaitTime: 2500,

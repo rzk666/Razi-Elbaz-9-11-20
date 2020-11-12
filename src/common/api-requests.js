@@ -3,24 +3,22 @@ import config from './config';
 // Utils
 import HttpRequest from '../utils/HttpRequest';
 
-// ----- Help Functions ----- //
 export const getLocationInfo = (key) => HttpRequest()({
   method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/locations/v1/${key}?apikey=${config.credentials.weatherApi}`,
-  url: 'https://testsh.free.beeceptor.com/getlocation',
+  url: `${config.api.url}/locations/v1/${key}?apikey=${config.credentials.weatherApi}`,
 });
 
 export const searchCities = (query) => HttpRequest()({
   method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/locations/v1/cities/autocomplete?apikey=${config.credentials.weatherApi}&q=${query}`,
-  url: 'https://testsh.free.beeceptor.com/getcities',
+  url: `${config.api.url}/locations/v1/cities/autocomplete?apikey=${config.credentials.weatherApi}&q=${query}`,
 });
 
 export const getWeatherByKey = (key) => HttpRequest()({
   method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/currentconditions/v1/${key}?apikey=${config.credentials.weatherApi}`,
-  url: 'https://testsh.free.beeceptor.com/getweather',
+  url: `${config.api.url}/currentconditions/v1/${key}?apikey=${config.credentials.weatherApi}`,
+});
+
+export const fetchByGeoLocation = (lat, lng) => HttpRequest()({
+  method: 'get',
+  url: `${config.api.url}/locations/v1/cities/geoposition/search?apikey=${config.credentials.weatherApi}&q=${lat},${lng}`,
 });
