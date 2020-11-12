@@ -2,7 +2,7 @@ import React from 'react';
 // Routing
 import { Link } from 'react-router-dom';
 // Universal
-import { HOME, FAVORITES } from '../../universal/pages';
+import { FAVORITES } from '../../universal/pages';
 // Components
 import {
   AppBar,
@@ -43,35 +43,32 @@ const ToggleTemprature = withStyles({
 })(ToggleButton);
 
 // ----- Main Component ----- //
-const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => {
-  const x = 5;
-  return (
-    <AppBar position="static">
-      <div className={styles.navbar_content}>
-        <div className={styles.nav_buttons}>
-          <NavbarLink to="/" active>Home</NavbarLink>
-          <NavbarLink to={`/${FAVORITES}`} active={false}>Favorites</NavbarLink>
-        </div>
-        <ToggleTempratureGroup
-          exclusive
-          value={tempratureType}
-          onChange={(e, newType) => {
-            if (newType) {
-              setTempratureType(newType);
-            }
-          }}
-        >
-          <ToggleTemprature value="F">°F</ToggleTemprature>
-          <ToggleTemprature value="C">°C</ToggleTemprature>
-        </ToggleTempratureGroup>
-        <AnimateOpacityHover>
-          <AnimateScaleClick>
-            <ThemeSwitch onClick={() => toggleDarkMode()} />
-          </AnimateScaleClick>
-        </AnimateOpacityHover>
+const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => (
+  <AppBar position="static">
+    <div className={styles.navbar_content}>
+      <div className={styles.nav_buttons}>
+        <NavbarLink to="/" active>Home</NavbarLink>
+        <NavbarLink to={`/${FAVORITES}`} active={false}>Favorites</NavbarLink>
       </div>
-    </AppBar>
-  );
-};
+      <ToggleTempratureGroup
+        exclusive
+        value={tempratureType}
+        onChange={(e, newType) => {
+          if (newType) {
+            setTempratureType(newType);
+          }
+        }}
+      >
+        <ToggleTemprature value="F">°F</ToggleTemprature>
+        <ToggleTemprature value="C">°C</ToggleTemprature>
+      </ToggleTempratureGroup>
+      <AnimateOpacityHover>
+        <AnimateScaleClick>
+          <ThemeSwitch onClick={() => toggleDarkMode()} />
+        </AnimateScaleClick>
+      </AnimateOpacityHover>
+    </div>
+  </AppBar>
+);
 
 export default Navbar;

@@ -100,7 +100,6 @@ const HomeController = (props) => {
 
   useEffect(() => {
     localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
-    // console.log(currentLocation);
   }, [currentLocation]);
 
   return (
