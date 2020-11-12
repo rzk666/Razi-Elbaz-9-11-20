@@ -38,10 +38,11 @@ const weather = (state = INITIAL_STATE.weather, action) => {
       };
     }
     case WEATHER_GET_DATA: {
-      const { data } = action;
-      const currentConditionData = data[0];
+      const { data, key, fromClient } = action;
+      const currentConditionData = fromClient ? data : data[0];
       return {
         ...state,
+        key,
         data: currentConditionData,
         hasError: false,
         errorCode: -1,
@@ -60,7 +61,7 @@ const weather = (state = INITIAL_STATE.weather, action) => {
         ...state,
         hasError: true,
         errorCode: `e${action.data}`,
-        isLoading: false,
+        isLoading: true,
       };
     }
     default: {

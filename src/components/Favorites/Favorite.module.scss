@@ -1,0 +1,30 @@
+.container{
+    h2{
+        font-size: 18px;
+    }
+    .temprature{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: auto;
+    }
+    .details_container{
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        img{
+            margin-bottom: 10px;
+            width: 125px;
+        }
+        p{
+            font-size: 14px;
+            text-align: center;
+            margin:0;
+        }
+    }
+}

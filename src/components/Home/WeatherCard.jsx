@@ -12,7 +12,7 @@ import {
   Favorite as FavoriteIcon,
 } from '@material-ui/icons';
 import GoogleMap from '../common/GoogleMap';
-import Forecast from '../common/Forecast';
+import Forecast from './Forecast';
 // Animations
 import {
   AnimateOpacityHover,
@@ -42,12 +42,16 @@ const Loader = () => (
   </div>
 );
 
-const FavoriteButton = ({ isFavorite, city }) => {
-  const tooltipText = isFavorite
+const FavoriteButton = ({
+  city,
+  isFavorite,
+  toggleFavorite,
+}) => {
+  const tooltipText = !isFavorite
     ? `Add ${city} to favorites`
     : `Remove ${city} from favorites`;
   return (
-    <div className={styles.favorite_container}>
+    <div onClick={() => toggleFavorite()} className={styles.favorite_container}>
       <AnimateOpacityHover>
         <Tooltip title={tooltipText}>
           { isFavorite
@@ -59,7 +63,12 @@ const FavoriteButton = ({ isFavorite, city }) => {
   );
 };
 
-const WeatherContent = ({ data, currentLocation, tempratureType }) => {
+const WeatherContent = ({
+  data,
+  currentLocation,
+  tempratureType,
+  toggleFavorite,
+}) => {
   const {
     WeatherIcon,
     WeatherText,
@@ -70,7 +79,11 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
   const { Value } = Imperial;
   const formattedDate = new Date(LocalObservationDateTime).toDateString();
   const formattedTemprature = tempratureType === 'F' ? Value : getCelcious(Value);
-  const { city, country } = currentLocation;
+  const {
+    city, country, isFavorite, coords,
+  } = currentLocation;
+  const { latitude, longitude } = coords;
+
   return (
     <div className={styles.content_container}>
       <div className={styles.details_container}>
@@ -84,10 +97,14 @@ const WeatherContent = ({ data, currentLocation, tempratureType }) => {
             alt="Weather Icon"
           />
         </div>
-        <FavoriteButton city={city} />
+        <FavoriteButton
+          toggleFavorite={toggleFavorite}
+          city={city}
+          isFavorite={isFavorite}
+        />
       </div>
       <div className={styles.map_container}>
-        <GoogleMap geo={{ lat: 22.34, lng: 22.32 }} zoom={8} />
+        <GoogleMap geo={{ lat: latitude, lng: longitude }} zoom={3} />
       </div>
     </div>
   );
@@ -122,6 +139,7 @@ const WeatherCard = ({
   tempratureType,
   currentWeather,
   currentLocation,
+  toggleFavorite,
 }) => {
   const { data, forecast, isLoading } = currentWeather;
   const { headline, daily } = forecast;
@@ -143,6 +161,7 @@ const WeatherCard = ({
                 : (
                   <>
                     <WeatherContent
+                      toggleFavorite={toggleFavorite}
                       tempratureType={tempratureType}
                       currentLocation={currentLocation}
                       data={data}

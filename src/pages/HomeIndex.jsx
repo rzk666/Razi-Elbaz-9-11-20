@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import {
   fetchWeather,
   fetchForecast,
+  weatherGetData,
+  weatherIsLoading,
 } from '../redux/models/weather/weatherActions';
 // Components
 import HomeController from '../controllers/HomeController';
@@ -23,6 +25,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchWeather: (Key) => dispatch(fetchWeather(Key)),
   fetchForecast: (Key) => dispatch(fetchForecast(Key)),
+  weatherGetData: (data, key) => dispatch(weatherGetData(data, key, true)),
+  weatherIsLoading: (isLoading) => dispatch(weatherIsLoading(isLoading)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(page(Home, HOME));
