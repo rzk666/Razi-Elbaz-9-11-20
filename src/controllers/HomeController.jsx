@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 // Utils
 import { useHistory } from 'react-router-dom';
 import HttpRequest from '../utils/HttpRequest';
+// Components
+import ErrorToast from '../components/common/ErrorToast';
 
 // ----- Help Functions ----- //
 const fetchByGeoLocation = (lat, lng) => HttpRequest()({
@@ -106,13 +108,18 @@ const HomeController = (props) => {
   }, [currentLocation]);
 
   return (
-    <View
-      {...props}
-      toggleFavorite={toggleFavorite}
-      currentLocation={currentLocation}
-      setCurrentLocation={setCurrentLocation}
-      fetchWeather={fetchWeatherWithForcast}
-    />
+    <>
+      <View
+        {...props}
+        toggleFavorite={toggleFavorite}
+        currentLocation={currentLocation}
+        setCurrentLocation={setCurrentLocation}
+        fetchWeather={fetchWeatherWithForcast}
+      />
+      <ErrorToast
+        hasError={weather.hasError}
+      />
+    </>
   );
 };
 

@@ -61,7 +61,7 @@ const weather = (state = INITIAL_STATE.weather, action) => {
         ...state,
         hasError: true,
         errorCode: `e${action.data}`,
-        isLoading: false,
+        isLoading: true,
       };
     }
     default: {

@@ -1,35 +1,22 @@
 /* eslint-disable no-unused-expressions */
 import React, { useEffect, useState } from 'react';
-// Utils
-import HttpRequest from '../utils/HttpRequest';
-// Config
-import config from '../common/config';
-
-const getWeatherByKey = (key) => HttpRequest()({
-  method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/currentconditions/v1/${key}?apikey=${config.credentials.weatherApi}`,
-  url: 'https://testsh.free.beeceptor.com/getweather',
-});
-
-const getLocationsByKey = (key) => HttpRequest()({
-  method: 'get',
-  // This is the url for production
-  // url: `${config.api.url}/locations/v1/${key}?apikey=${config.credentials.weatherApi}`,
-  url: 'https://testsh.free.beeceptor.com/getlocation',
-});
+// Components
+import ErrorToast from '../components/common/ErrorToast';
+// API
+import { getWeatherByKey, getLocationInfo } from '../common/api-requests';
 
 const FavoritesController = (props) => {
   // ----- state ----- //
   const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
   const [favoritesData, setFavoritesData] = useState({});
+  const [hasError, setError] = useState(false);
 
   // ----- Help Functions ----- //
   const getFavoriteData = async (favoriteKey) => {
     try {
       const weatherResponse = await getWeatherByKey(favoriteKey);
       const favoriteData = weatherResponse.data[0];
-      const locationResponse = await getLocationsByKey(favoriteKey);
+      const locationResponse = await getLocationInfo(favoriteKey);
       const locationData = locationResponse.data;
       const { LocalizedName, Country, GeoPosition } = locationData;
       const { Latitude, Longitude } = GeoPosition;
@@ -41,8 +28,7 @@ const FavoritesController = (props) => {
         coords: { latitude: Latitude, longitude: Longitude },
       });
     } catch (e) {
-    // Handle error
-      console.log('err');
+      setError(true);
     }
   };
 
@@ -66,10 +52,16 @@ const FavoritesController = (props) => {
 
   const { View } = props;
   return (
-    <View
-      favorites={favorites}
-      {...props}
-    />
+    <>
+      <View
+        favorites={favorites}
+        {...props}
+      />
+      <ErrorToast
+        hasError={hasError}
+        onClose={() => setError(false)}
+      />
+    </>
   );
 };
 
