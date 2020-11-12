@@ -1,13 +1,13 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+// Contexts
+import { useDarkMode } from '../../context/ThemeContext';
 // API Key
 import config from '../../common/config';
 
 const GOOGLE_MAPS_API_KEY = config.credentials.googleMaps;
 
-// TODO LATER -> Switch darkmode handling to context so we can get
-// the mode here without drilling props all the way down to apply these styles
-const styles = [
+const darkStyles = [
   { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
   { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
   { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
@@ -90,19 +90,22 @@ const styles = [
 
 const GoogleMap = ({
   google, geo, zoom,
-}) => (
-  <Map
-    // style={{ width: '100%' }}
-    // styles={styles}
-    google={google}
-    zoom={zoom}
-    initialCenter={geo}
-  >
-    <Marker
-      position={geo}
-    />
-  </Map>
-);
+}) => {
+  const darkMode = useDarkMode();
+  return (
+    <Map
+      key={darkMode}
+      styles={darkMode ? darkStyles : []}
+      google={google}
+      zoom={zoom}
+      initialCenter={geo}
+    >
+      <Marker
+        position={geo}
+      />
+    </Map>
+  );
+};
 
 export default GoogleApiWrapper({
   apiKey: GOOGLE_MAPS_API_KEY,

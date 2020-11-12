@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 // Components
 import Navbar from '../components/common/Navbar';
 import { Paper } from '@material-ui/core';
+// Contexts
+import { useDarkMode, useToggleDarkMode } from '../context/ThemeContext';
 // Theme
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -18,7 +20,8 @@ const darkPalette = {
 
 const WithLayoutHOC = (ComposedComponent) => {
   const WithLayout = (props) => {
-    const [darkMode, toggleDarkMode] = useState(false);
+    const darkMode = useDarkMode();
+    const toggleDarkMode = useToggleDarkMode();
     const [tempratureType, setTempratureType] = useState('F');
     const theme = createMuiTheme({
       palette: darkMode ? { ...darkPalette } : {},
@@ -49,7 +52,7 @@ const WithLayoutHOC = (ComposedComponent) => {
         }}
         >
           <Navbar
-            toggleDarkMode={() => toggleDarkMode(!darkMode)}
+            toggleDarkMode={() => toggleDarkMode()}
             setTempratureType={setTempratureType}
             tempratureType={tempratureType}
           />
