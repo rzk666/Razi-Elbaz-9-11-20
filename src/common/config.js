@@ -1,5 +1,7 @@
 const SERVER_PROTOCOL = process.env.REACT_APP_SERVER_PROTOCOL;
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const MAPS_API_KEY = process.env.REACT_APP_MAPS_API_KEY;
 
 const config = {
   app: {
@@ -14,8 +16,8 @@ const config = {
     url: `${SERVER_PROTOCOL}://${SERVER_HOST}`,
   },
   credentials: {
-    weatherApi: 'q4KARGiRRhZ409UDQrU8gdQAOgsaHnpS',
-    googleMaps: 'AIzaSyAFgNymaVaMnIGULfPPMNuNUpO6pqLvbIc',
+    weatherApi: WEATHER_API_KEY,
+    googleMaps: MAPS_API_KEY,
   },
 };
 

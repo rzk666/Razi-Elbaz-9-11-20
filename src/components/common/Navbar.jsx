@@ -1,8 +1,8 @@
 import React from 'react';
 // Routing
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // Universal
-import { HOME, FAVORITES } from '../../universal/pages';
+import { FAVORITES } from '../../universal/pages';
 // Components
 import {
   AppBar,
@@ -18,8 +18,8 @@ import styles from './Navbar.module.scss';
 
 // ----- Help Components ----- //
 const NavbarLink = ({ to, isActive, children }) => (
-  <AnimateOpacityHover>
-    <Link to={to} active={isActive}>{children}</Link>
+  <AnimateOpacityHover initialOpacity={isActive ? 1 : 0.25}>
+    <Link to={to}>{children}</Link>
   </AnimateOpacityHover>
 );
 
@@ -43,14 +43,30 @@ const ToggleTemprature = withStyles({
 })(ToggleButton);
 
 // ----- Main Component ----- //
-const Navbar = ({ tempratureType, setTempratureType, toggleDarkMode }) => {
-  const x = 5;
+const Navbar = ({
+  tempratureType,
+  setTempratureType,
+  toggleDarkMode,
+}) => {
+  const history = useHistory();
+  const { location } = history;
+  const { pathname } = location;
   return (
     <AppBar position="static">
       <div className={styles.navbar_content}>
         <div className={styles.nav_buttons}>
-          <NavbarLink to="/" active>Home</NavbarLink>
-          <NavbarLink to={`/${FAVORITES}`} active={false}>Favorites</NavbarLink>
+          <NavbarLink
+            to="/"
+            isActive={pathname === '/'}
+          >
+            Home
+          </NavbarLink>
+          <NavbarLink
+            to={`/${FAVORITES}`}
+            isActive={pathname === `/${FAVORITES}`}
+          >
+            Favorites
+          </NavbarLink>
         </div>
         <ToggleTempratureGroup
           exclusive

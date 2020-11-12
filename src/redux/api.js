@@ -38,5 +38,4 @@ export const httpRequestAction = async (action, dispatch, token) => {
   }
 };
 
-// Thunk
-export const api = (action) => (dispatch, getState) => httpRequestAction(action, dispatch);
+export const api = (action) => (dispatch) => httpRequestAction(action, dispatch);

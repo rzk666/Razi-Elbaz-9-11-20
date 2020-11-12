@@ -15,7 +15,7 @@ const HomeController = (props) => {
     fetchForecast,
     weatherGetData,
     weatherIsLoading,
-    // View Components
+    // View Component
     View,
   } = props;
 
@@ -46,7 +46,6 @@ const HomeController = (props) => {
 
   const toggleFavorite = () => {
     const { key, isFavorite } = currentLocation;
-    // This means we need to add favorite to the favorites
     if (!isFavorite) {
       localStorage.setItem('favorites', JSON.stringify([...favoritesList, key]));
     } else {
@@ -100,7 +99,6 @@ const HomeController = (props) => {
 
   useEffect(() => {
     localStorage.setItem('lastLocation', JSON.stringify(currentLocation));
-    // console.log(currentLocation);
   }, [currentLocation]);
 
   return (
